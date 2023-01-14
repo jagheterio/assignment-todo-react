@@ -1,19 +1,15 @@
 import React from "react";
 import Todo from "./Todo";
 
-const Filter = ({ filterInput, setFilterInput, setTodos, todos }) => {
+const Filter = ({ todos, setTodos, filterInput, setFilterInput }) => {
   //Events
-console.log(filterInput);
-
   const filterInputHandler = (event) => {
+    // console.log(event.target.value);
     setFilterInput(event.target.value);
-    console.log(setFilterInput);
-
-    if(filterInput.includes(todos)){
-        console.log("display");
-    }
-    else{
-    }
+    console.log(filterInput);
+    
+    if(todos.filter((value) => value.text.indexOf(filterInput))){
+       console.log("display");}
   }; 
 
   const deleteAllHandler = () => {
@@ -22,12 +18,12 @@ console.log(filterInput);
 
   return (
     <div className="filter">
-      <form action="">
+      <form>
         <div className="input">
           <label>Filter by activity</label>
           <input 
             value={filterInput}
-            // onChange={filterInputHandler}
+            onChange={filterInputHandler}
             type="text"
             className="filter-input" />
         </div>

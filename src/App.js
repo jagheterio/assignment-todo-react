@@ -65,6 +65,7 @@ function App() {
       />
     <Filter
       filterInput ={filterInput}
+      setFilterInput ={setFilterInput}
       />
     <TodoList 
       filterdTodos={filterdTodos}

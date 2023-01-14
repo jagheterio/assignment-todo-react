@@ -1,6 +1,6 @@
 import React from "react";
 
-const Form = ({setInputText, todos, setTodos, inputText, setStatus}) => {
+const Form = ({todos, setTodos, inputText, setInputText,setStatus}) => {
     const inputTextHandler =(event)=>{
        setInputText(event.target.value);
     };
@@ -33,7 +33,7 @@ const Form = ({setInputText, todos, setTodos, inputText, setStatus}) => {
       </div>
 
       <div className="select">
-        <label>Filter by situation</label>
+        <label>Filter by status</label>
         <select onChange={statusHandler} name="todos" className="filter-todo">
           <option value="all">All</option>
           <option value="completed">Completed</option>
