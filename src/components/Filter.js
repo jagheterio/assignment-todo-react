@@ -1,15 +1,15 @@
 import React from "react";
 import Todo from "./Todo";
+import TodoList from "./TodoList";
 
 const Filter = ({ todos, setTodos, filterInput, setFilterInput }) => {
   //Events
-  const filterInputHandler = (event) => {
+  const filterInputHandler = (e) => {
     // console.log(event.target.value);
-    setFilterInput(event.target.value);
+    setFilterInput(e.target.value);
     console.log(filterInput);
-    
-    if(todos.filter((value) => value.text.indexOf(filterInput))){
-       console.log("display");}
+
+    todos.filter((todo)=>{todo.text.includes(filterInput)})
   }; 
 
   const deleteAllHandler = () => {
