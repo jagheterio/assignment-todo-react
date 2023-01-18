@@ -12,37 +12,54 @@ function App() {
   const [status, setStatus] = useState('all');
   const [filterdTodos, setFilteredTodos] = useState([]);
   const [filterInput, setFilterInput] = useState("");
+  const [loadedTodos, setLoadedTodos] = useState(false);
 
   // RUN ONCE when the app start
+  useEffect(()=> {
+    if (loadedTodos)
+    saveLocalTodos();
+  }, [todos]); 
+
+  // const setTodosHandler = (todos)=>{
+  //   setTodos(todos)
+  //   saveLocalTodos()
+  // }
+
   useEffect(() => {
     getLocalTodos();
-  }, []);
+    setLoadedTodos(true) 
+   }, []);
 
   // Use Effect
   useEffect(()=> {
     filterHandler();
-    saveLocalTodos();
-  }, [todos, status]); 
+  }, [todos, status, filterInput]); 
+
 
   // Functions
   const filterHandler =() => {
+
+    const inputFilterTodo = todos.filter((todo)=>todo.text.includes(filterInput));
+
     switch(status){
       case "completed":
-        setFilteredTodos(todos.filter(todo => todo.completed === true));
+        setFilteredTodos(inputFilterTodo.filter(todo => todo.completed === true));
         break;
       case "uncompleted":
-        setFilteredTodos(todos.filter(todo => todo.completed === false));
+        setFilteredTodos(inputFilterTodo.filter(todo => todo.completed === false));
         break;
       default:
-        setFilteredTodos(todos);
+        setFilteredTodos(inputFilterTodo);
         break;
     }
   };
   // Save to local
   const saveLocalTodos =()=>{
+      console.log("save", JSON.stringify(todos));
       localStorage.setItem('todos', JSON.stringify(todos));
     };
   const getLocalTodos =() =>{
+    console.log("get", localStorage.getItem('todos') );
     if(localStorage.getItem('todos') === null){
       localStorage.setItem('todos', JSON.stringify([]));
     }else{
@@ -66,6 +83,7 @@ function App() {
     <Filter
       filterInput ={filterInput}
       setFilterInput ={setFilterInput}
+      setTodos={setTodos}
       />
     <TodoList 
       filterdTodos={filterdTodos}

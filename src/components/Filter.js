@@ -4,15 +4,17 @@ import TodoList from "./TodoList";
 
 const Filter = ({ todos, setTodos, filterInput, setFilterInput }) => {
   //Events
-  const filterInputHandler = (e) => {
-    // console.log(event.target.value);
-    setFilterInput(e.target.value);
-    console.log(filterInput);
-
-    todos.filter((todo)=>{todo.text.includes(filterInput)})
+  const filterInputHandler = (event) => {
+    console.log(event.target.value);
+    setFilterInput(event.target.value);
   }; 
 
-  const deleteAllHandler = () => {
+  console.log(setTodos);
+
+  const deleteAllHandler = (event) => {
+    console.log(setTodos);
+
+    event.preventDefault();
     setTodos([]);
   };
 
